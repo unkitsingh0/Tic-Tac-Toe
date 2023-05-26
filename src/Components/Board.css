@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Bhai+2&display=swap');
+
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    
+    font-family: 'Baloo Bhai 2', cursive;
 }
 
 .bord-container{
@@ -15,6 +17,10 @@
     background-color: aliceblue;
     color: rgb(31, 112, 233);
 }
+.Heading{
+    margin-bottom: 4rem;
+    border-bottom: 2px solid;
+}
 .child1{
     width: 25%;
     display: flex;
@@ -22,10 +28,21 @@
     margin-bottom: 1rem;
     justify-content: space-between;
 }
+@media only screen and (max-width: 700px) {
+    .child1 {
+      flex-direction: column;
+    }
+  }
 .forCss{
     /* border: 2px solid rgb(31, 112, 233); */
     width: 25%;
 }
+
+@media only screen and (max-width: 700px) {
+    .forCss {
+      width: 70%;
+    }
+  }
 .bord-row{
     display: flex;
     justify-content: space-evenly;

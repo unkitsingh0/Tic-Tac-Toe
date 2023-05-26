@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Square from "./Square";
 import "./Board.css";
 import Button from '@mui/material/Button';
+
 function Board() {
     let [state, setState] = useState([
         null,
@@ -14,7 +15,7 @@ function Board() {
         null,
         null,
     ]);
-    let [xo, setXo] = useState(false);
+    let [xo, setXo] = useState(true);
 
     let checkWinner = () => {
         let winnerLogic = [
@@ -38,41 +39,40 @@ function Board() {
 
     let handelClick = (index) => {
         // console.log(index,'cliked')
-        let xoData;
-        setState((prevState) => {
-            xoData = xo ? "X" : "O";
-
-            return [
-                ...prevState,
-                prevState[index] === null ? (prevState[index] = xoData) : "",
-            ];
-        });
-        setXo(!xo);
-        console.log("Button has been clicked");
+        let copydata = [...state]
+        if(state[index]===null){
+            copydata[index]=xo?"X":"O"
+            setState(copydata)
+            setXo(!xo);
+        }
+        
+        // console.log("Button has been clicked");
     };
     let isWinner = checkWinner();
     return (
         <div className="bord-container">
-            {/* < variant="contained">Hello World</Button> */}
+          <h1 className="Heading">Tic Tac Toe</h1>
             {isWinner ? (
-                <h1>
-                    {isWinner} wins{" "}
+                <div style={{display:"flex"}}>
+                <h1 style={{marginRight:"24px"}}>
+                 <span style={{borderBottom:"1px solid"}}>{isWinner}</span> wins</h1>
                     <Button
                     variant="contained"
-                        onClick={() => {
-                            setState([null, null, null, null, null, null, null, null, null]);
-                            setXo(true);
-                        }}
+                    onClick={() => {
+                        setState([null, null, null, null, null, null, null, null, null]);
+                        setXo(true);
+                    }}
                     >
                         Start Again
                     </Button>
-                </h1>
+                        </div>
+                
             ) : (
                 <>
                     <div className="child1" >
-            <h3>{xo ? "X" : "O"}' Chance </h3>
+            <h3>{xo ? "X" : "O"}'s Chance </h3>
             <h1>
-              {isWinner}{" "}
+              {isWinner}
               <Button
               variant="contained"
                 onClick={() => {
