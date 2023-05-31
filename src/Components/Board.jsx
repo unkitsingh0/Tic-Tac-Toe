@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Square from "./Square";
 import "./Board.css";
 import Button from "@mui/material/Button";
+
 // let drawNumber = 0;
 function Board() {
   let [state, setState] = useState([
@@ -17,6 +18,12 @@ function Board() {
   ]);
   let [xo, setXo] = useState(true);
   let [drawNumber, setDrawNumber] = useState(0);
+  let [x, setX] = useState(0);
+  let [o, setO] = useState(0);
+  let [drawCount, setDrawCount] = useState(0);
+
+  // drawNumber >= 9 ? setDrawCount(drawCount + 1) : console.log("drawcount");
+
   let checkWinner = () => {
     let winnerLogic = [
       [0, 1, 2],
@@ -54,8 +61,58 @@ function Board() {
     // console.log("Button has been clicked");
   };
 
+  useEffect(() => {
+    if (drawNumber >= 9) {
+      setDrawCount((drawCount) => drawCount + 1);
+      setTimeout(() => {
+        setState([null, null, null, null, null, null, null, null, null]);
+        setXo(true);
+        setDrawNumber(0);
+      }, 2000);
+    }
+  }, [drawNumber]);
   return (
     <div className="bord-container">
+      {/* <p>
+        X:{score} O:{score1}
+      </p> */}
+      {/* <p className="score-card">
+        X:{x} | O:{o}
+      </p> */}
+      <div className="score-card ">
+        <div className="inside-score-card">
+          <div className="score-div">
+            <p>
+              X:{x} | O:{o} | D:{drawCount}
+            </p>
+          </div>
+          <div className="reset-div">
+            <Button
+              variant="outlined"
+              onClick={(x) => {
+                setState([
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                ]);
+                setXo(true);
+                setDrawNumber(0);
+                setX(0);
+                setO(0);
+                setDrawCount(0);
+              }}
+            >
+              Reset
+            </Button>
+          </div>
+        </div>
+      </div>
       <h1 className="Heading">Tic Tac Toe</h1>
       {isWinner ? (
         <div style={{ display: "flex" }}>
@@ -68,6 +125,7 @@ function Board() {
               setState([null, null, null, null, null, null, null, null, null]);
               setXo(true);
               setDrawNumber(0);
+              isWinner === "X" ? setX(x + 1) : setO(o + 1);
             }}
           >
             Start Again
