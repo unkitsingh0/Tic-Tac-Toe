@@ -54,6 +54,9 @@
   .child1 {
     flex-direction: column;
   }
+  .child1 h3 {
+    font-size: 1.5rem;
+  }
 }
 .forCss {
   /* border: 2px solid rgb(31, 112, 233); */
