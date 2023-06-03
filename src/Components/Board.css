@@ -53,6 +53,7 @@
 @media only screen and (max-width: 700px) {
   .child1 {
     flex-direction: column;
+    width: 30%;
   }
   .child1 h3 {
     font-size: 1.5rem;
